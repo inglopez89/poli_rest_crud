@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package producto;
+
+service ProductoService {
+  rpc CrearProducto (ProductoRequest) returns (ProductoResponse);
+  rpc ObtenerProducto (ProductoId) returns (ProductoResponse);
+  rpc ListarProductos (Vacio) returns (ListaProductos);
+  rpc ActualizarProducto (ActualizarProductoRequest) returns (ProductoResponse);
+  rpc EliminarProducto (ProductoId) returns (EliminarResponse);
+}
+
+message ProductoRequest {
+  string nombre = 1;
+  string descripcion = 2;
+  float precio = 3;
+}
+
+message ActualizarProductoRequest {
+  int32 id = 1;
+  string nombre = 2;
+  string descripcion = 3;
+  float precio = 4;
+}
+
+message ProductoId {
+  int32 id = 1;
+}
+
+message ProductoResponse {
+  int32 id = 1;
+  string nombre = 2;
+  string descripcion = 3;
+  float precio = 4;
+}
+
+message ListaProductos {
+  repeated ProductoResponse productos = 1;
+}
+
+message Vacio {}
+
+message EliminarResponse {
+  bool ok = 1;
+}
